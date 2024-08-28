@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot
+  labels:
+    app: springboot
+    kubernetes.azure.com/generator: devhub
+  namespace: springboot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springboot
+  template:
+    metadata:
+      labels:
+        app: springboot
+    spec:
+      containers:
+        - name: springboot
+          image: acrspotwesteuprd01.azurecr.io/springboot00:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000

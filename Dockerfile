@@ -1,4 +1,12 @@
-FROM lolhens/baseimage-openjre
-ADD target/springbootApp.jar springbootApp.jar
-EXPOSE 80
-ENTRYPOINT ["java", "-jar", "springbootApp.jar"]
+FROM python:3.11-slim
+ENV PORT 8000
+EXPOSE 8000
+WORKDIR /usr/src/app
+
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+ENTRYPOINT ["python"]
+CMD ["app.py"]
